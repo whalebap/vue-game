@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구구단</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js">
+
+</script>
+</head>
+<body>
+    <div id="root">
+<div>
+    {{first}} 곱하기 {{second}}는?
+</div>
+<form @submit.prevent="onSubmit">
+
+    <input type="number" v-model="answer" ref="userAnswer">
+    <button>
+        입력
+    </button>
+
+</form>
+<div id="result">
+    결과 : {{result}}
+</div>
+    </div>
+    <script>
+  const app = new Vue({
+      el : "#root",
+      data : {
+          first : Math.ceil(Math.random()*9),
+          second : Math.ceil(Math.random()*9),
+          answer : '',
+          result : ''
+
+      },
+      methods : {
+          onSubmit(){     
+              if(parseInt(this.answer) === this.first * this.second){
+                this.result = '정답';
+                this.first=Math.ceil(Math.random()*9);
+                this.second=Math.ceil(Math.random()*9);
+                this.answer="";
+                this.$refs.userAnswer.focus()
+              } else{
+                this.result ='오답'
+                this.answer=""
+              }
+              
+          }
+      }
+  })
+    </script>
+</body>
+</html>
